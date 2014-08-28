@@ -7,7 +7,9 @@ var stylus = require('gulp-stylus');
 var nib = require('nib');
 
 var paths = {
-  vendors: ['bower_components/jquery/dist/jquery.min.js', 'bower_components/handlebars/handlebars.min.js', '.bowercomponents/ember/ember.min.js'],
+  vendors: ['bower_components/jquery/dist/jquery.min.js',
+    'bower_components/handlebars/handlebars.min.js',
+    '.bowercomponents/ember/ember.min.js'],
   scripts: ['assets/js/*.js'],
   styles: ['assets/stylesheets/*.styl']
 };

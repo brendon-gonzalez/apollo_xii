@@ -1,15 +1,7 @@
 var express = require('express');
 var http = require('http');
-var nib = require('nib');
 var exphbs = require('express-handlebars');
 var path = require('path');
-
-function compile(str, path) {
-  return stylus(str)
-    .set('filename', path)
-    .set('compress', true)
-    .use(nib());
-}
 
 var app = express();
 
