@@ -6,18 +6,19 @@
     "postinstall": "./node_modules/.bin/bower install"
   },
   "dependencies": {
+    "bower": "1.3.9",
     "express": "4.8.5",
-    "nib": "1.0.3",
-    "nomnom": "1.8.0",
     "express-handlebars": "1.0.1",
-    "path": "0.4.9",
     "gulp": "3.8.7",
     "gulp-concat": "2.3.4",
-    "gulp-uglify": "0.3.2",
     "gulp-nodemon": "1.0.4",
-    "gulp-watch": "0.6.9", 
     "gulp-stylus": "1.3.0",
-    "bower": "1.3.9"
+    "gulp-uglify": "0.3.2",
+    "gulp-watch": "0.6.9",
+    "nib": "1.0.3",
+    "nodemailer": "^1.3.0",
+    "nomnom": "1.8.0",
+    "path": "0.4.9"
   },
   "devDependencies": {
     "precommit-hook": "1.0.7"
