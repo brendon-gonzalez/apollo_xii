@@ -17,7 +17,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('socket', process.env.PORT || opts.sock);
 app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
 app.set('view engine', '.hbs');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 routes.registerRoutes(app);
 

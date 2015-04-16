@@ -4,46 +4,54 @@ var uglify = require('gulp-uglify');
 var nodemon = require('gulp-nodemon');
 var watch = require('gulp-watch');
 var stylus = require('gulp-stylus');
+var browserify = require('gulp-browserify');
+var reactify = require('reactify');
 var nib = require('nib');
 
 var paths = {
-  vendors: ['bower_components/jquery/dist/jquery.min.js',
-    'bower_components/handlebars/handlebars.min.js',
-    '.bowercomponents/ember/ember.min.js'],
-  scripts: ['assets/js/*.js'],
-  styles: ['assets/stylesheets/*.styl']
+
+  styles: ['./assets/stylesheets/*.styl']
 };
 
-gulp.task('vendors', function() {
-  return gulp.src(paths.vendors)
-    .pipe(concat('vendors.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('public/js/'));
-});
 
-gulp.task('scripts', function() {
-  gulp.src(paths.scripts)
+gulp.task('browserify', function(){
+  gulp.src('./assets/js/app.js')
     .pipe(watch(function(files) {
-      return files.pipe(concat('main.js'))
-        .pipe(gulp.dest('public/js'));
-    }));
-});
-
-gulp.task('webserver', function () {
-  nodemon({ script: 'app.js'})
-  .on('restart', function() {
-    console.log('Server Has Restarted');
-  });
+      return files
+        .pipe(browserify({
+          insertGlobals : true,
+          transform: ['reactify'],
+          extensions: ['.jsx'],
+          debug :false
+        }))
+        .pipe(gulp.dest('./build/js'));
+    })
+    .on('change', function(event) {
+      console.log('File ' + event.path + ' was ' + event.type + ', running tasks...');
+    })
+  );
 });
 
 gulp.task('stylus', function() {
   gulp.src(paths.styles)
     .pipe(watch(function(files) {
-      return files.pipe(stylus({use: nib(), compress: true}))
-        .pipe(gulp.dest('public/stylesheets'));
+      return files
+        .pipe(stylus({use: nib(), compress: true}))
+        .pipe(gulp.dest('./build/stylesheets'));
     }));
 });
 
+gulp.task('webserver', function () {
+  nodemon({
+    script: 'app.js',
+    ignore: ['!assets/**/*.js', '!assets/*.js']
+  })
+  .on('restart', function() {
+    console.log('Server Has Restarted');
+  });
+});
+
+
 gulp.task('default', function() {
-  gulp.start('vendors', 'scripts', 'stylus', 'webserver');
+  gulp.start('browserify', 'stylus', 'webserver');
 });

@@ -1,6 +1,9 @@
 exports.registerRoutes = function(app) {
-  var index = require('./controllers/index')(app);
+  var search = require('./controllers/search')(app);
 
   app.route('/')
-    .get(index.index);
+    .get(search.show);
+
+  app.route('/search')
+    .get(search.show);
 };
