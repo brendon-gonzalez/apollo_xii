@@ -1,3 +1,45 @@
-h1 {
-  color: #f00;
+@import 'skeleton/normalize';
+//sputniks palette
+$red = #993333;
+$light-red = lighten($red, 15%);
+$light-gray = #ccc;
+$dark-gray = #424242;
+$near-black = #101010;
+@import 'skeleton/skeleton';
+
+// Global
+body {
+  color: $light-gray;
+  background: lighten($near-black, 15%) no-repeat linear-gradient(top, 0% $near-black , 100% lighten($near-black, 15%));
+  font-family: 'Lato', sans-serif;
+}
+
+::-webkit-input-placeholder {
+  color: $#777;
+}
+
+
+// Header
+header {
+  text-align: center;
+  line-height: 1rem;
+  margin-bottom: 20px;
+}
+.logo {
+  color: $red;
+  margin-bottom: 0;
+  span {
+    color: $light-gray;
+  }
+  strong {
+    color: $light-red;
+  }
+}
+
+footer {
+  text-align: center;
+  line-height: 1rem;
+  p {
+    margin-bottom: 5px;
+  }
 }

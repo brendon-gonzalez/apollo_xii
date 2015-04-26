@@ -3,6 +3,7 @@ var http = require('http');
 var exphbs = require('express-handlebars');
 var path = require('path');
 var routes = require('./routes');
+var art = require('ascii-art');
 
 var app = express();
 
@@ -15,7 +16,14 @@ var opts = require('nomnom')
 
 app.set('port', process.env.PORT || 3000);
 app.set('socket', process.env.PORT || opts.sock);
-app.engine('.hbs', exphbs({defaultLayout: 'main', extname: '.hbs'}));
+app.engine('.hbs', exphbs({
+  defaultLayout: 'main',
+  partialsDir: 'views/partials',
+  extname: '.hbs'
+}));
+
+app.config = require('./config');
+
 app.set('view engine', '.hbs');
 app.use(express.static(path.join(__dirname, 'build')));
 
@@ -32,5 +40,8 @@ if (app.get('socket')) {
 }
 
 http.createServer(app).listen(app.get('socket') || app.get('port'), '0.0.0.0', function() {
-  console.log('Express server listening on port ' + (app.get('socket') || app.get('port')));
+  art.font('apollo|xii', 'Broadway', function(rendered){
+    console.log('Express server listening on port ' + (app.get('socket') || app.get('port')));
+    console.log(rendered);
+  });
 });

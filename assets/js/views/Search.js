@@ -6,14 +6,14 @@ var React = require('react');
 var SearchBar = require('./components/search_bar.jsx');
 
 module.exports = Backbone.View.extend({
-  el: 'body',
-  template: '<div class="widget-container"></div>',
+  el: '.container .main-app',
+  template: '<div id="search"></div>',
   initialize: function() {
     this.render();
   },
   render: function() {
     this.$el.html(this.template);
-    React.render(<SearchBar />, this.$('.widget-container').get(0));
+    React.render(<SearchBar />, this.$('#search').get(0));
     return this;
   }
 });

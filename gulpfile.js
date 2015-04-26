@@ -6,8 +6,8 @@ var reactify = require('reactify');
 var nib = require('nib');
 
 var paths = {
-  js: ['./assets/js/**/*.js', './assets/js/*.js'],
-  styles: ['./assets/stylesheets/*.styl']
+  js: ['./assets/js/**/*.js', './assets/js/*.js', './assets/js/**/*.jsx'],
+  styles: ['./assets/stylesheets/*.styl', './assets/stylesheets/**/*.styl']
 };
 
 gulp.task('browserify', function(){
@@ -23,7 +23,11 @@ gulp.task('browserify', function(){
 
 gulp.task('stylus', function() {
   gulp.src(paths.styles)
-  .pipe(stylus({use: nib(), compress: true}))
+  .pipe(stylus({
+    use: nib(),
+    compress: true,
+    import: ['nib']
+  }))
   .pipe(gulp.dest('./build/stylesheets'));
 });
 
