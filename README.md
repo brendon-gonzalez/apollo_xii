@@ -1,11 +1,10 @@
-New Project Boilerplate
+Apollo XII
 ======================
+Apollo is a proxy for sputnikmusic.com designed to improve their search functionality and add a responsive side to their site.
 
-To install you will need gulp, bower and node
+To install all you need is node.
 
 ``` sh
-npm install gulp -g
-npm install bower -g
 npm install
-gulp
+npm start
 ```

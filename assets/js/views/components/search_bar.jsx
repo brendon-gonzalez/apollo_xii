@@ -6,7 +6,6 @@ module.exports = React.createClass({
   handleSuggestion: function(e) {
     var keyword = e.target.value;
     var scope = this;
-    // var pending = false;
     if (keyword.length > 3) {
       clearTimeout(timer);
       timer = setTimeout(function() {
