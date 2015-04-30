@@ -21,7 +21,11 @@ module.exports = function(app) {
       });
       request({
         url: url,
-      }, function(err, resp, json) {
+      }, function(err, resp, body) {
+        var json = {};
+        try {
+          json = JSON.parse(body);
+        } catch (e) { console.error(e); }
         if (err || resp.statusCode !== 200) {
           return res.send(200, err);
         }

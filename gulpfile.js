@@ -42,7 +42,7 @@ gulp.task('webserver', function () {
     script: 'app.js',
     ignore: ['assets/', 'build/']
   })
-  .on('start', ['watch'])
+  .on('start', ['browserify', 'stylus', 'watch'])
   .on('change', ['watch'])
   .on('restart', function() {
     console.log('Server Has Restarted');
