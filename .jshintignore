@@ -1,4 +1,0 @@
-node_modules
-*.json
-public/js/vendors.min.js
-bower_components/**/*.js

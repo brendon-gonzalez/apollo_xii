@@ -1,6 +1,2 @@
 /node_modules
-/bower_components
-/public
-/dist
-/build
 npm-debug.log
