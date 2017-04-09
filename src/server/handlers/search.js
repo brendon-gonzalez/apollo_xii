@@ -10,7 +10,7 @@ function formatter(options) {
 }
 
 export default function autoSuggest(req, res) {
-  const keyword = req.param('keyword');
+  const { keyword } = req.params;
   const url = formatter({
     pathname: 'bsearch.php',
     query: {
@@ -22,10 +22,14 @@ export default function autoSuggest(req, res) {
     let json = {};
     try {
       json = JSON.parse(body);
-    } catch (e) { console.error(e); }
-    return res.send(200, json);
+    } catch (e) { throw (e); }
+    return res
+      .status(200)
+      .send(json);
   })
   .catch(error =>
-    res.send(500, error)
+    res
+      .status(500)
+      .send(error)
   );
 }

@@ -14,7 +14,8 @@ gulp.task('server', ['compile'], () => {
   nodemon({
     script: 'dist/server/main.js',
     watch: 'src/server',
-    tasks: ['compile']
+    tasks: ['compile'],
+    env: { NODE_ENV: 'development' }
   });
 });
 
