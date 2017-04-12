@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import autoSuggest from './handlers/search';
+import * as search from './handlers/search';
+import * as band from './handlers/band';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.sendStatus(200);
-});
+router.get('/auto_suggest/:keyword', search.autoSuggest);
+router.get('/search/:keyword', search.index);
 
-router.get('/auto_suggest/:keyword', autoSuggest);
+router.get('/band/:id', band.index);
 
 export default router;

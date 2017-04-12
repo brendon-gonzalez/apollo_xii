@@ -1,5 +1,5 @@
-const gulp = require('gulp');
 const babel = require('gulp-babel');
+const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
 
 gulp.task('compile', () => {
@@ -12,10 +12,10 @@ gulp.task('compile', () => {
 
 gulp.task('server', ['compile'], () => {
   nodemon({
+    env: { NODE_ENV: 'development' },
     script: 'dist/server/main.js',
-    watch: 'src/server',
     tasks: ['compile'],
-    env: { NODE_ENV: 'development' }
+    watch: 'src/server'
   });
 });
 

@@ -1,15 +1,47 @@
-import URL from 'url';
+// import cheerio from 'cheerio';
 import request from 'request-promise';
-import config from '../../config';
+import config from '../config';
+import formatter from '../lib/formatter';
 
-function formatter(options) {
-  return URL.format(Object.assign({
-    protocol: 'http',
-    host: config.host,
-  }, options));
+export function index(req, res) {
+  const { keyword } = req.params;
+  const url = formatter({
+    pathname: 'search_results.php',
+    query: {
+      search_in: 'Bands',
+      search_text: keyword
+    }
+  });
+  request({
+    url,
+    timeout: config.timeout,
+    followRedirect: false,
+    resolveWithFullResponse: true,
+    simple: false
+  })
+  .then((response) => {
+    const { statusCode, headers } = response;
+    if (statusCode === 200) {
+      // Do search
+      res
+        .status(200)
+        .send({});
+    } else if (statusCode === 302) {
+      // Found something, redirect.
+      const bandId = headers.location.split('bandid=')[1];
+      res
+        .status(302)
+        .redirect(`/band/${bandId}?redirected=true`);
+    }
+  })
+  .catch(error =>
+    res
+      .status(500)
+      .send(error)
+  );
 }
 
-export default function autoSuggest(req, res) {
+export function autoSuggest(req, res) {
   const { keyword } = req.params;
   const url = formatter({
     pathname: 'bsearch.php',
@@ -17,7 +49,7 @@ export default function autoSuggest(req, res) {
       term: keyword
     }
   });
-  request({ url })
+  request({ url, timeout: config.timeout })
   .then((body) => {
     let json = {};
     try {

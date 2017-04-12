@@ -1,8 +1,8 @@
-import { join } from 'path';
+import bodyParser from 'body-parser';
 import express from 'express';
 import morgan from 'morgan';
-import bodyParser from 'body-parser';
-import config from '../config';
+import { join } from 'path';
+import config from './config';
 import router from './router';
 
 const app = express();

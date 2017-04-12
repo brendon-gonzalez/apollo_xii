@@ -4,6 +4,9 @@
   "license": "MIT",
   "description": "A better sputnikmusic.com experience",
   "scripts": {
+    "compile": "gulp compile",
+    "dev": "gulp",
+    "start": "gulp compile && NODE_ENV=production node dist/server/main.js",
     "test": "mocha --compilers js:babel-core/register --recursive -r ./test/test_helper.js"
   },
   "babel": {
