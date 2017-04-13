@@ -1,5 +1,5 @@
 export default {
   host: 'www.sputnikmusic.com',
   port: process.env.port || 8080,
-  timeout: 150000
+  timeout: 1500
 };
