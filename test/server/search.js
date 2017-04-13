@@ -15,6 +15,7 @@ describe('search', () => {
         });
     });
   });
+
   describe('autoSuggest', () => {
     it('returns an array of bands', (done) => {
       chai.request(server)

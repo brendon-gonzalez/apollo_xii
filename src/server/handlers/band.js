@@ -27,6 +27,8 @@ export function index(req, res) {
     const $ = cheerio.load(body);
     const response = {
       name: $('font[size="6"]').text(),
+      genres: $('.tags .tag').map((i, tag) => $(tag).text().trim()).get(),
+      albums: Array(7),
       similar_bands: $('p.alt2[style*="font-size:9pt"] > a').map((i, band) => ({
         name: $(band).text(),
         href: $(band).attr('href')
